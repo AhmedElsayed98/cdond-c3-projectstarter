@@ -11,13 +11,13 @@
     state: latest
     update_cache: yes
 
-- name: "install pm2"
+- name: "install pm2" 
   become: true
   npm:
     name: pm2
     global: yes
     production: yes
-  state: present
+  #state: present
 - name: Install Python
   raw: apt -y update && apt install -y python-minimal
   when: check_python.rc != 0
