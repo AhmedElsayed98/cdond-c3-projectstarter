@@ -254,7 +254,10 @@ jobs:
             # your code here
             apk add --update ansible
             apk add -no-cache python3 py3-pip
-            apk add --update nodejs npm            
+            apk add --update nodejs npm\
+            sudo yum update
+            #apt-get update -y  
+            #apt-get install -y yum          
       - run: 
           name: Install tar utility 
           command: |
@@ -293,16 +296,17 @@ jobs:
       # attach workspace
       - attach_workspace:
           at: ~/
-      - run: 
-          name: install tar utility
-          command: yum install -y tar gzip
       - run:
           name: Install dependencies
           command: |
             # your code here
             apk add --update ansible
             apk add -no-cache python3 py3-pip
-            apk add --update nodejs npm  
+            apk add --update nodejs npm 
+            apt-get install -y yum 
+      - run: 
+          name: install tar utility
+          command: yum install -y tar gzip
       - run:
           name: Deploy backend
           command: |
