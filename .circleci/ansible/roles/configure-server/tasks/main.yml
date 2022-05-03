@@ -17,7 +17,7 @@
     name: pm2
     global: yes
     production: yes
-  #state: present
+    state: present
 - name: Install Python
   raw: apt -y update && apt install -y python-minimal
   when: check_python.rc != 0
