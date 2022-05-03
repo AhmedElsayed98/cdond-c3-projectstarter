@@ -91,8 +91,8 @@ jobs:
           name: Run Frontend test
           command:
             cd frontend
-      - run: npm install
-      - run: npm run test                      
+              npm install
+              npm run test                      
   test-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -108,8 +108,8 @@ jobs:
           name: Test Backend
           command: 
             cd backend
-      - run: npm install
-      - run: npm run test                
+              npm install
+              npm run test                
   scan-frontend:
     docker:
       # Docker image here
@@ -124,9 +124,9 @@ jobs:
           name: check for vulnerability
           command: 
             cd frontend
-            npm install
-            npm audit fix --force
-            npm audit --audit-level=critical
+              npm install
+              npm audit fix --force
+              npm audit --audit-level=critical
             #npm audit --audit-level=critical
             #npm audit fix --audit-level=critical --force
       # Your job code here
@@ -145,10 +145,10 @@ jobs:
           name: check for vulnerability
           command:
             cd backend
-            npm install
-            npm audit fix --force
-            npm audit --audit-level=critical
-            #npm audit --audit-level=critical
+              npm install
+              npm audit fix --force
+              npm audit --audit-level=critical
+              #npm audit --audit-level=critical
             #npm audit fix --audit-level=critical --force
   deploy-infrastructure:
     docker:
