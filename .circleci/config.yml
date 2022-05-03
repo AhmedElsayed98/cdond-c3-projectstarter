@@ -252,7 +252,7 @@ jobs:
       - run: 
           name: Install dependencies
           command: |
-             yum install -y ansible
+             #yum install -y ansible
              apt-get install python3  
              yum -y install nodejs
             #sudo yum update
@@ -372,7 +372,7 @@ jobs:
           name: Install dependencies
           command: |
             # your code here
-             yum install -y ansible
+             #yum install -y ansible
              apt-get install python3  
              yum -y install nodejs        
       - run:
