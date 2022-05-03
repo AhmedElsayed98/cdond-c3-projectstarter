@@ -245,7 +245,8 @@ jobs:
       - image: amazon/aws-cli
     steps:
       # Checkout code from git
-      - checkout 
+      - checkout
+      - run: yum install -y tar gzip 
       - attach_workspace:
           at: ~/
       - run: 
@@ -255,13 +256,9 @@ jobs:
             apk add --update ansible
             apk add -no-cache python3 py3-pip
             apk add --update nodejs npm\
-            sudo yum update
+            #sudo yum update
             #apt-get update -y  
             #apt-get install -y yum          
-      - run: 
-          name: Install tar utility 
-          command: |
-            yum install -y tar gzip
       - run:
           name: Get backend url
           command: |
@@ -303,10 +300,7 @@ jobs:
             apk add --update ansible
             apk add -no-cache python3 py3-pip
             apk add --update nodejs npm 
-            apt-get install -y yum 
-      - run: 
-          name: install tar utility
-          command: yum install -y tar gzip
+            apk add --no-cache tar
       - run:
           name: Deploy backend
           command: |
