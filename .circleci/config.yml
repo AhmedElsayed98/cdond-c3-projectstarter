@@ -253,7 +253,7 @@ jobs:
           name: Install dependencies
           command: |
              #yum install -y ansible
-             apt-get install python3  
+             #apt-get install python3  
              yum -y install nodejs
             #sudo yum update
             #apt-get update -y  
@@ -373,7 +373,7 @@ jobs:
           command: |
             # your code here
              #yum install -y ansible
-             apt-get install python3  
+             #apt-get install python3  
              yum -y install nodejs        
       - run:
           name: Update cloudfront distribution
