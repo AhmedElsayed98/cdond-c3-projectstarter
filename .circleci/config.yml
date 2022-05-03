@@ -196,7 +196,7 @@ jobs:
       - checkout
       # Add ssh keys with fingerprint
       - add_ssh_keys:
-          fingerprints: ["6f:67:57:e4:26:44:a6:bf:56:c6:e0:72:71:9d:45:66"]
+          fingerprints: ["48:10:74:13:61:48:74:5c:ad:de:b8:c9:dd:f2:08:cf"]
       # attach workspace
       - attach_workspace:
           at: ~/
@@ -211,7 +211,8 @@ jobs:
           command: |
             # Your code here
             cd .circleci/ansible
-            ansible-playbook -i inventory.txt configure-server.yml
+            #chmod 400 udacit.pem
+            ansible-playbook -i inventory.txt configure-server.yml 
       # Here's where you will add some code to rollback on failure      
   run-migrations:
     docker:
