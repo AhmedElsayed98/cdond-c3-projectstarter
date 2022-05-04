@@ -440,16 +440,13 @@ workflows:
           #requires: [deploy-infrastructure]
       #- run-migrations:
           #requires: [configure-infrastructure]
-      - deploy-frontend:
+      - deploy-frontend
           #requires: [run-migrations]
-          filters:
-            branches:
-              only: [test-feature-bracnh]
-      #- deploy-backend
+      - deploy-backend
           #requires: [run-migrations]
-      #- smoke-test:
-        #  requires: [deploy-backend, deploy-frontend]
-      #- cloudfront-update:
-        #  requires: [smoke-test]
+      - smoke-test:
+          requires: [deploy-backend, deploy-frontend]
+      - cloudfront-update:
+          requires: [smoke-test]
       #- cleanup:
         #  requires: [cloudfront-update]
