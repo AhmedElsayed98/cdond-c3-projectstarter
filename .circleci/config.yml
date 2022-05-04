@@ -258,7 +258,7 @@ jobs:
              #rpm -Va --nofiles --nodigest
              #yum -y upgrade --skip-broken
              #yum -y install npm
-             npm install -g aws-cli
+             npm install  aws-cli
       - run:
           name: Get backend url
           command: |
