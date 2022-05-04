@@ -256,7 +256,6 @@ jobs:
              yum clean all
              yum -y update --skip-broken
              yum install -y python3
-             yum -y install --skip-broken
              yum -y update --skip-broken http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 
              yum -y install npm             
             #sudo yum update
