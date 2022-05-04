@@ -254,11 +254,10 @@ jobs:
           command: |
              yum -y install yum-utils
              yum clean all
-             #yum install -y ansible
              yum -y update --skip-broken
              yum install -y python3
-             yum -y install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm --skip-broken
-             yum -y update --skip-broken
+             yum -y install --skip-broken
+             yum -y update --skip-broken http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 
              yum -y install npm             
             #sudo yum update
             #apt-get update -y  
