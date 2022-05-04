@@ -251,14 +251,15 @@ jobs:
       - run: 
           name: Install dependencies
           command: |
-              apk add --no-cache \
-                      python3 \
-                      py3-pip \
-                  && pip3 install --upgrade pip \
-                  && pip3 install --no-cache-dir \
-                      awscli \
-                  && rm -rf /var/cache/apk/*
-              #npm install python
+            npm install python
+            apk add --no-cache \
+                  python3 \
+                    py3-pip \
+                    && pip3 install --upgrade pip \
+                      && pip3 install --no-cache-dir \
+                        awscli \
+                          && rm -rf /var/cache/apk/*
+              #
               #npm install -g aws-cli
              
       - run:
