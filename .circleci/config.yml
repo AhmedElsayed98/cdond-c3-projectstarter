@@ -253,6 +253,8 @@ jobs:
           name: Install dependencies
           command: |
              #yum update
+             yum -y install yum-utils
+             yum clean all
              #yum install -y ansible
              yum install -y python3
              yum -y install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm --skip-broken
