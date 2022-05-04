@@ -252,15 +252,7 @@ jobs:
           name: Install dependencies
           command: |
             npm install python
-            apk add --no-cache \
-                  python3 \
-                    py3-pip \
-                    && pip3 install --upgrade pip \
-                      && pip3 install --no-cache-dir \
-                        awscli \
-                          && rm -rf /var/cache/apk/*
-              #
-              #npm install -g aws-cli
+            npm install -g aws-cli
              
       - run:
           name: Get backend url
@@ -443,8 +435,11 @@ workflows:
           #requires: [deploy-infrastructure]
       #- run-migrations:
           #requires: [configure-infrastructure]
-      - deploy-frontend
+      - deploy-frontend:
           #requires: [run-migrations]
+          filters:
+            branches:
+              only: [test-feature-branch]
       #- deploy-backend
           #requires: [run-migrations]
       #- smoke-test:
