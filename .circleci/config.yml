@@ -240,9 +240,9 @@ jobs:
      # Here's where you will add some code to rollback on failure      
 
   deploy-frontend:
-    docker:
+    docker: 
       # Docker image here that supports AWS CLI
-      - image: circleci/node:13.8.0
+      - image: python:3.7-alpine3.11
     steps:
       # Checkout code from git
       - checkout 
@@ -251,9 +251,15 @@ jobs:
       - run: 
           name: Install dependencies
           command: |
-            npm install python
-            npm install -g aws-cli
-             
+            apk add --update nodejs npm 
+            apk add tar
+            apk add --no-cache \
+                python3 \
+                py3-pip \
+            && pip3 install --upgrade pip \
+            && pip3 install --no-cache-dir \
+                awscli \
+            && rm -rf /var/cache/apk/*
       - run:
           name: Get backend url
           command: |
@@ -272,8 +278,7 @@ jobs:
             npm install
             npm run build
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
-            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
-      # Here's where you will add some code to rollback on failure      
+            aws s3 cp dist s3://udapeople-5455fa9 --recursive
                     
   deploy-backend:
     docker:
@@ -325,7 +330,7 @@ jobs:
             # your code here
             npm install
             npm install --save get-curl
-            npm install -g aws-cli  
+            #npm install -g aws-cli  
       - run:
           name: Get backend url
           command: |
@@ -338,9 +343,9 @@ jobs:
             # your code here
             if curl "${API_URL}/api/status" | grep "ok"
             then
-                return 0
+              return 0
             else
-                return 1
+              return 1
             fi
       - run:
           name: Frontend smoke test.
@@ -349,13 +354,13 @@ jobs:
             URL="http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website-us-east-1.amazonaws.com/#/employees"
             echo ${URL}
             if curl -s ${URL} | grep "Welcome"
-            then
+              then
             # Change this to 0 after the job fails
-              return 0
-            else
-              return 1
+                return 0
+              else
+                return 1
             fi   
-            # Here's where you will add some code to rollback on failure  
+          # Here's where you will add some code to rollback on failure  
 
   cloudfront-update:
     docker:
@@ -435,14 +440,13 @@ workflows:
           #requires: [deploy-infrastructure]
       #- run-migrations:
           #requires: [configure-infrastructure]
-      - deploy-frontend
+      #- deploy-frontend
           #requires: [run-migrations]
-      #- deploy-backend      
-      - deploy-backend
+      #- deploy-backend
           #requires: [run-migrations]
-      - smoke-test:
-          requires: [deploy-backend, deploy-frontend]
-      - cloudfront-update:
-          requires: [smoke-test]
-      #- cleanup:
-        #  requires: [cloudfront-update]
+      #- smoke-test
+          #requires: [deploy-backend, deploy-frontend]
+      - cloudfront-update
+          #requires: [smoke-test]
+      - cleanup:
+          requires: [cloudfront-update]
