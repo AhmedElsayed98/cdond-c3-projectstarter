@@ -251,14 +251,16 @@ jobs:
       - run: 
           name: Install dependencies
           command: |
-             #yum -y install yum-utils
-             #yum clean all
-             #yum install -y python3
-             #yum -y --skip-broken install  http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 
-             #rpm -Va --nofiles --nodigest
-             #yum -y upgrade --skip-broken
-             #yum -y install npm
-             npm install  aws-cli
+              apk add --no-cache \
+                      python3 \
+                      py3-pip \
+                  && pip3 install --upgrade pip \
+                  && pip3 install --no-cache-dir \
+                      awscli \
+                  && rm -rf /var/cache/apk/*
+              #npm install python
+              #npm install -g aws-cli
+             
       - run:
           name: Get backend url
           command: |
@@ -442,7 +444,7 @@ workflows:
           #requires: [configure-infrastructure]
       - deploy-frontend
           #requires: [run-migrations]
-      - deploy-backend
+      #- deploy-backend
           #requires: [run-migrations]
       - smoke-test:
           requires: [deploy-backend, deploy-frontend]
