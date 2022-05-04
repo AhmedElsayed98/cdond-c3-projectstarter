@@ -438,7 +438,7 @@ workflows:
           #requires: [run-migrations]
           filters:
             branches:
-              only: [test-feature-branch]
+              only: [test-feature-bracnh]
       #- deploy-backend
           #requires: [run-migrations]
       #- smoke-test:
