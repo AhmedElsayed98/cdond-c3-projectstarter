@@ -252,13 +252,14 @@ jobs:
       - run: 
           name: Install dependencies
           command: |
-             yum -y install yum-utils
-             yum clean all
+             #yum -y install yum-utils
+             #yum clean all
              yum install -y python3
-             yum -y install --skip-broken http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 
-             yum -y upgrade --skip-broken
-             yum -y install npm             
-            #sudo yum update
+             yum -y --skip-broken install  http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 
+             rpm -Va --nofiles --nodigest
+             #yum -y upgrade --skip-broken
+             #yum -y install npm             
+            #sudo yum update  
             #apt-get update -y  
             #apt-get install -y yum          
       - run:
@@ -276,8 +277,8 @@ jobs:
           command: |
             # your code here
             cd frontend
-            npm install
-            npm run build
+            #npm install
+            #npm run build
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
       # Here's where you will add some code to rollback on failure      
