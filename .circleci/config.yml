@@ -252,11 +252,11 @@ jobs:
       - run: 
           name: Install dependencies
           command: |
-             yum update
+             #yum update
              #yum install -y ansible
              yum install -y python3
-             #yum -y install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-             #yum -y install npm             
+             yum -y install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm --skip-broken
+             yum -y install npm             
             #sudo yum update
             #apt-get update -y  
             #apt-get install -y yum          
