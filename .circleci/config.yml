@@ -278,7 +278,8 @@ jobs:
             npm install
             npm run build
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
-            aws s3 cp dist s3://udapeople-5455fa9 --recursive
+            npm audit fix
+            aws s3 cp dist s3://udapeople-afd3cb8 --recursive
                     
   deploy-backend:
     docker:
